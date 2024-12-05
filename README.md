@@ -184,7 +184,8 @@ Los servidores web deben acceder a la carpeta compartida del servidor NFS. Los s
 3. Copia el sitio default que ha sido editado y lo pega en un nuevo sitio que será el que sea habilitado.
 4. Crea la carpeta en la que va a estar el contenido compartido, la monta, habilita el nuevo sitio virtual y habilita el  nuevo sitio virtual deshabilitando el default.
     
-    ![image.png](image%2016.png)
+![image](https://github.com/user-attachments/assets/55b137ce-992d-4abd-b67f-3f0ecc6b1d76)
+
     
 
 ```bash
