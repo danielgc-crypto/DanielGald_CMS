@@ -146,6 +146,9 @@ Permite el tráfico de entrada MYSQL.
 # 2. Provisionamiento de las instancias
 
 ## Instancia balanceador.
+Se ha asociado una IP elástica con la siguiente IP y DOMINO.
+![image](https://github.com/user-attachments/assets/da40ecfd-8b68-472b-a131-4de4d5f31dde)
+
 
 La función de esta instancia es redirigir los paquetes a las máquinas que actúan como servidores web siguiendo un método Round Robin.
 
@@ -156,6 +159,7 @@ Para el correcto funcionamiento de la instancia que ejerce la función de balanc
 3. Copia el sitio virtual por defecto y crea uno nuevo
 4. Comenta la linea **Document root** de /etc/apache2/sites-available/000-default.conf y añade la configuración de balanceador.
 5. Deshabilita el sitio virtual por defecto y habilita el nuevo, por último reinica apache para aplicar los cambios.
+6. Por último fuera del fichero se han hecho una serie de comandos para que funcione el sitio seguro.
 
 ![image](https://github.com/user-attachments/assets/948f1e2e-0e11-496d-81fe-797488b51af8)
 
