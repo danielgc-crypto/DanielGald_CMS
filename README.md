@@ -1,9 +1,31 @@
 # Wordpress tarea
 
-Curso: Aplicaciones Web (https://www.notion.so/Aplicaciones-Web-134efbb7467181749017e02281325d39?pvs=21)
-Fecha: 5 de diciembre de 2024 → 5 de diciembre de 2024
-Tipo: Tarea
-Estado: En Proceso
+# Índice
+
+1. [Introducción](#introducción)
+   - [Objetivo de la práctica](#objetivo-de-la-práctica)
+   - [Estructura del proyecto](#estructura-del-proyecto)
+
+2. [Infrastructura](#infrastructura)
+   - [Creación de la VPC](#creación-de-la-vpc)
+     - [¿Qué es una VPC?](#qué-es-una-vpc)
+     - [Creación de subredes](#creación-de-subredes)
+   - [Creación de las instancias](#creación-de-las-instancias)
+     - [Balanceador](#balanceador)
+     - [NFS](#nfs)
+     - [Servidores Web (2)](#servidores-web-2)
+     - [BBDD](#bbdd)
+   - [Configuración de grupos de seguridad](#configuración-de-grupos-de-seguridad)
+     - [Grupo de seguridad Balanceador](#grupo-de-seguridad-balanceador)
+     - [Grupo de seguridad Servidores Web](#grupo-de-seguridad-servidores-web)
+     - [Grupo de seguridad BBDD](#grupo-de-seguridad-bbdd)
+
+3. [Provisionamiento de las instancias](#provisionamiento-de-las-instancias)
+   - [Instancia Balanceador](#instancia-balanceador)
+   - [Instancia NFS](#instancia-nfs)
+   - [Instancias Servidores Web](#instancias-servidores-web)
+   - [Instancia MySQL](#instancia-mysql)
+
 
 # 1. Introducción
 
@@ -28,21 +50,24 @@ Una VPC es una parte aislada de la nube de AWS que contiene objetos de AWS, como
 
 Para la cración de la VPC hay que dirigirse al apartado de **VPC** en AWS.
 
-![image.png](image.png)
+![image](https://github.com/user-attachments/assets/824f8119-e651-4fc4-9097-838a790e8082)
+
 
 Una vez en la consola de VPC hay un botón que destaca más que los demás, ahí es dónde hay que darle para crear la VPC.
+![image](https://github.com/user-attachments/assets/a035a5aa-9597-4b3a-b022-4c73b7098019)
 
-![image.png](image%201.png)
+
 
 Se dirigirá directamente a la consola de creación de VPC.
 
 Hay que definir el nombre y la cantidad de subredes, todo muy intuitivo y nada complejo. En VPC y más te da la opción de crear las subredes mientras creas la VPC, esa es la diferencia entre **solo la VPC**  **y VPC y más.**
+![image](https://github.com/user-attachments/assets/321db33c-0a56-4674-8d26-6882645dfd4f)
 
-![image.png](image%202.png)
 
-El siguiente paso es definir la red en la que quieres crear la VPC y una vez definido ya da paso a las subredes.
+El siguiente paso es definir la red en la que quieres crear la VPC y una vez definido ya da paso a las subredes.  
+![image](https://github.com/user-attachments/assets/39cc6e35-68cd-43dc-8b90-30534489bc9a)
 
-![image.png](image%203.png)
+
 
 ### Creación de subredes
 
@@ -52,11 +77,13 @@ Es necesario tener una subred pública para el balanceador y 2 privadas, una pri
 
 **VPC y más** te da la opción por defecto de crear 2 subredes públicas y 2 privadas basándose en la dirección de red que se ha especificado anteriormente. Luego solo hay que asociar las instancias a las subredes pertinentes.
 
-![image.png](image%204.png)
+![image](https://github.com/user-attachments/assets/1b62f83a-b585-4f76-b7b4-1e20b31ee86a)
+
 
 Por último solo queda crear la VPC.
 
-![image.png](image%205.png)
+![image](https://github.com/user-attachments/assets/2f1e604a-ddcd-44ae-b342-91432f2bd1a1)
+
 
 ## Creación de las instancias
 
@@ -69,21 +96,25 @@ Hay que crear un total de 5 instancias.
 
 Hay que dirigirse a la consola de EC2 para crear las instancias.
 
-![image.png](image%206.png)
+![image](https://github.com/user-attachments/assets/aff26658-a06d-4d0e-89c1-c8617145874b)
 
-![image.png](image%207.png)
+
+![image](https://github.com/user-attachments/assets/f8aed546-9952-45f8-9fa1-9133b969699d)
+
 
 Después de lanzar la instancia hay que definir el nombre y el tipo de ami que se va a utilizar.
 
-![image.png](image%208.png)
+![image](https://github.com/user-attachments/assets/6fb65620-130d-4e88-a4a4-ee37343d1629)
 
 En tipo de instancia yo he escogido la t2.small aunque tenga un coste ligeramente superior.
 
-![image.png](image%209.png)
+![image](https://github.com/user-attachments/assets/9ef4add3-ee99-4dda-983e-2a13895c7861)
+
 
 Y en configuraciones de red se aplica la VPC y subred correspondiente, al ser el ejemplo de la máquina balanceador se creará en la subred pública.
 
-![image.png](image%2010.png)
+![image](https://github.com/user-attachments/assets/2bc7e14b-5a82-42cd-951a-235ad5ff18b7)
+
 
 ### Configuración de grupos de seguridad
 
@@ -95,19 +126,22 @@ Para los grupos de seguridad hay 3 creados, uno por capa, cada uno permitiendo l
 
 Permite el tráfico de entrada HTTP/S y SSH.
 
-![image.png](image%2011.png)
+![image](https://github.com/user-attachments/assets/eeba1999-834b-4b27-98a7-414e12e00e81)
+
 
 ### Grupo seguridad ServidoresWEB.
 
 Permite el tráfico de entrada HTTP, NFS y MSSQL.
 
-![image.png](image%2012.png)
+![image](https://github.com/user-attachments/assets/05a8faf8-13f9-46b6-a41a-49cf689222b9)
+
 
 ### Grupo seguridad BBDD.
 
 Permite el tráfico de entrada MYSQL.
 
-![image.png](image%2013.png)
+![image](https://github.com/user-attachments/assets/6be1014c-92f1-4bfd-b343-47fb587772a8)
+
 
 # 2. Provisionamiento de las instancias
 
@@ -123,7 +157,8 @@ Para el correcto funcionamiento de la instancia que ejerce la función de balanc
 4. Comenta la linea **Document root** de /etc/apache2/sites-available/000-default.conf y añade la configuración de balanceador.
 5. Deshabilita el sitio virtual por defecto y habilita el nuevo, por último reinica apache para aplicar los cambios.
 
-![image.png](image%2014.png)
+![image](https://github.com/user-attachments/assets/948f1e2e-0e11-496d-81fe-797488b51af8)
+
 
 ## Instancia NFS
 
@@ -133,7 +168,8 @@ La única función que tiene el NFS es alojar los recursos a los que acceden los
 2. Crea la carpeta compartida, asigna permisos y añade en el /etc/exports el rango de ip que pueden acceder al recurso y que permisos tienen.
 3. Instala wordpress dentro de la carpeta compartida, asigna los permisos y la carpeta compartida y reinicia el servidor para aplicar cambios.
 
-![image.png](image%2015.png)
+![image](https://github.com/user-attachments/assets/86e2282e-1a9e-4836-afe0-39efd86dd9db)
+
 
 ## Instancias servidores WEB
 
@@ -159,4 +195,5 @@ En esta instancia lo único necesario es crear una base de datos con un usuario 
 1. Instalar los paquetes necesarios como el servicio mysql.
 2. Crear una base de datos especificando el rango de red desde donde pueden tener acceso a la base de datos.
 
-![image.png](image%2017.png)
+![image](https://github.com/user-attachments/assets/df787bd6-bf7c-4191-a669-c1741b7cd980)
+
